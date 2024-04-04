@@ -1,0 +1,11 @@
+#!/bin/sh
+
+magick --version > version.txt
+magick convert sample.png -quality 100 sample.avif
+
+for i in png avif
+do
+	magick convert sample.$i -gravity center -crop 100x100+0+0 \
+		-resize 800% -colorspace RGB PNG32:cropped-$i.png
+done
+
